@@ -4,7 +4,7 @@ Install in-app-blast.unitypackage
 
 Add object to scene: Assets\InAppBlast\InAppBlast.prefab
 
-Инициализировать сервис в любом удобном MonoBehaviour: 
+Initialize InAppBlast service in any convenient MonoBehaviour: 
 
 		void Start ()
 		{
@@ -19,11 +19,13 @@ Add object to scene: Assets\InAppBlast\InAppBlast.prefab
 			InAppBlast.RegisterUser("<user_name>");
 		}
 
-Для iOS дополнительно необходимо добавить в xcode проект фреймворк InAppBlast.framework
+For iOS is nesessary to include InAppBlast.framework (our iOS lib github.com/InAppBlast/inappblast-ios) into generted XCode project.
 
-Для пуш нотификаций:
-сгенерировать ключи для сервера
-добавить код по получению идентификатора устройства и регистрации его на сервере InAppBlast:
+Next steps are needed for work with iOS push notification.
+
+1. сгенерировать ключи для сервера
+2. добавить код по получению идентификатора устройства и регистрации его на сервере InAppBlast:
+
 		- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
 			// Для iOS 7 и ниже
@@ -40,7 +42,7 @@ Add object to scene: Assets\InAppBlast\InAppBlast.prefab
 			[[InAppBlast sharedInstance] addPushDeviceToken:deviceToken];
 		}
 
-получение пуш нотификации:
+3. On receive notification:
 
 		- (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 			[[InAppBlast sharedInstance] handleRemoteNotificationWithInfo:userInfo];
