@@ -19,22 +19,23 @@ Initialize InAppBlast service in any convenient MonoBehaviour:
 			InAppBlast.RegisterUser("<user_name>");
 		}
 
-For iOS is nesessary to include InAppBlast.framework (our iOS lib ) into generted XCode project.
+For iOS is nesessary to include InAppBlast.framework (our iOS native lib) into generted XCode project.
 https://github.com/InAppBlast/inappblast-ios
 
 Next steps are needed for work with iOS push notification.
 
-1. сгенерировать ключи для сервера
-2. добавить код по получению идентификатора устройства и регистрации его на сервере InAppBlast:
+1. Generate keys for server side.
+2. Add statement for get device token and register it within InAppBlast (works on XCode 6 or higher):
 
 		- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-			// Для iOS 7 и ниже
-			[[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-
-			// Для iOS 8 и выше
-			// [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-			// [[UIApplication sharedApplication] registerForRemoteNotifications];
+			if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+				// for iOS 8 or higher
+				[[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+				[[UIApplication sharedApplication] registerForRemoteNotifications];
+			} else {
+				// for iOS 7 or lower
+				[[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+			}
 
 			return YES;
 		}
