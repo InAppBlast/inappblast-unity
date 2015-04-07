@@ -15,11 +15,12 @@ Initialize InAppBlast service in any convenient MonoBehaviour:
 
 		void OnInAppBlastInit()
 		{
-			// сервис успешно инициализирован и готов к работе
+			// service is successfully initialized and ready to work!
 			InAppBlast.RegisterUser("<user_name>");
 		}
 
-For iOS is nesessary to include InAppBlast.framework (our iOS lib github.com/InAppBlast/inappblast-ios) into generted XCode project.
+For iOS is nesessary to include InAppBlast.framework (our iOS lib ) into generted XCode project.
+https://github.com/InAppBlast/inappblast-ios
 
 Next steps are needed for work with iOS push notification.
 
