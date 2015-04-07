@@ -22,7 +22,7 @@ Initialize InAppBlast service in any convenient MonoBehaviour:
 For iOS is nesessary to include InAppBlast.framework (our iOS native lib) into generted XCode project.
 https://github.com/InAppBlast/inappblast-ios
 
-Next steps are needed for work with iOS push notification.
+Next steps are needed for work with iOS push notifications.
 
 1. Generate keys for server side.
 2. Add statement for get device token and register it within InAppBlast (works on XCode 6 or higher):
@@ -44,7 +44,7 @@ Next steps are needed for work with iOS push notification.
 			[[InAppBlast sharedInstance] addPushDeviceToken:deviceToken];
 		}
 
-3. On receive notification:
+3. On receive notification add:
 
 		- (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 			[[InAppBlast sharedInstance] handleRemoteNotificationWithInfo:userInfo];
